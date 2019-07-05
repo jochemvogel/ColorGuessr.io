@@ -1,0 +1,97 @@
+/* ELEMENTS */
+
+body {
+    background-color: #232323;
+    margin: 0;
+    font-family: 'Khand', sans-serif;
+}
+
+/* HEADER */
+
+h1 {
+    text-align: center;
+    color: white;
+    line-height: 1.1;
+    padding: 20px 0;
+    background-color: #309D00;
+    margin: 0;
+    font-weight: 700;
+    font-size: 4em;
+}
+
+#rgb-display {
+    font-size: 0.7em;
+    text-transform: uppercase;
+    font-weight: normal;
+    display: block;
+    margin: 1% 0;
+}
+
+#score {
+    font-size: 0.5em;
+    font-weight: normal;
+}
+
+/* STRIPE */
+
+button {
+    border: none;
+    background-color: none;
+    text-transform: uppercase;
+    height: 100%;
+    font-weight: 700;
+    color: #309D00;
+    letter-spacing: 1.2px;
+    font-size: 1.3em;
+    transition: all 0.5s;
+    outline: none;
+}
+
+button:hover {
+    color: white;
+    background-color: #309D00;
+}
+
+#status-message {
+    display: inline-block;
+    width: 20%;
+}
+
+.selected {
+    background-color: #309D00;
+    color: white;
+}
+
+#stripe {
+    background-color: white;
+    height: 35px;
+    text-align: center;
+    color: black;
+}
+
+/* SQUARES */
+
+.square {
+    width: 30%;
+    background: purple;
+    padding-bottom: 30%;
+    float: left;
+    margin: 1.66%;
+    border-radius: 10%;
+    transition: background 400ms;
+}
+
+#squares {
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+
+
+
+
+
+
+
+
+
