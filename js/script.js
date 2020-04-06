@@ -1,23 +1,23 @@
-let hslDisplay = document.getElementById('hsl-display');
-let rgbDisplay = document.getElementById('rgb-display');
+const hslDisplay = document.getElementById('hsl-display');
+const hexDisplay = document.getElementById('hex-display');
+const rgbDisplay = document.getElementById('rgb-display');
 
-let statusDisplay = document.getElementById('status-message');
-let scoreDisplay = document.getElementById('score');
-let resetButton = document.getElementById('reset');
+const statusDisplay = document.getElementById('status-message');
+const scoreDisplay = document.getElementById('score');
+const resetButton = document.getElementById('reset');
 
-let h1 = document.querySelector('h1');
+const h1 = document.querySelector('h1');
 
-let levelButtons = document.querySelectorAll('.level');
-let squares = document.querySelectorAll('.square');
-let squaresDisplay = document.querySelectorAll('#squares');
+const levelButtons = document.querySelectorAll('.level');
+const squares = document.querySelectorAll('.square');
+const squaresDisplay = document.querySelectorAll('#squares');
 
-
-let colors = [];
-let numSquares = 6;
-let pickedColor;
-let score = 0;
-let guesses = 0;
-let oneGuess = true;
+let colors = [],
+    numSquares = 6,
+    pickedColor,
+    score = 0,
+    guesses = 0,
+    oneGuess = true;
 
 init();
 
@@ -109,11 +109,9 @@ function reset() {
 
     pickedColor = pickColor();
 
-    // Take all individual rgb values from rgb array
-    rgbArray = randomWord.replace(/[^\d,]/g, '').split(',');
-
-    hslDisplay.textContent = RGBtoHSL(rgbArray[0], rgbArray[1], rgbArray[2]); // <-- DISPLAY HSL 
-    rgbDisplay.textContent = pickedColor; // <-- DISPLAY RGB
+    hslDisplay.textContent = RGBtoHSL(pickedColor);
+    hexDisplay.textContent = RGBToHex(pickedColor);
+    rgbDisplay.textContent = pickedColor;  // <-- DISPLAY RGB
 
     resetButton.textContent = 'Reset Colors';
     statusDisplay.textContent = '';
@@ -170,13 +168,27 @@ function randomColor() {
     return "rgb(" + r + ", " + g + ", " + b + ")";
 }
 
+/*
+
+\o/ Thanks to Jon Kantner (CSS-tricks) for next two functions \o/
+
+*/
+
 // Convert RGB values to HSL
-// Thanks to Jon Kantner (CSS-tricks)
-function RGBtoHSL(r, g, b) {
+function RGBtoHSL(rgb) {
+    let sep = rgb.indexOf(",") > -1 ? "," : " ";
+    rgb = rgb.substr(4).split(")")[0].split(sep);
+  
+    for (let R in rgb) {
+      let r = rgb[R];
+      if (r.indexOf("%") > -1)
+        rgb[R] = Math.round(r.substr(0,r.length - 1) / 100 * 255);
+    }
+
     // Make r, g and b fractions of 1
-    r /= 255;
-    g /= 255;
-    b /= 255;
+    let r = rgb[0] / 255,
+        g = rgb[1] / 255,
+        b = rgb[2] / 255;
 
     // Find greatest and smallest channel values
     let cmin = Math.min(r, g, b),
@@ -219,4 +231,23 @@ function RGBtoHSL(r, g, b) {
     l = +(l * 100).toFixed(0);
 
     return "hsl(" + h + ", " + s + "%, " + l + "%)";
+}
+
+function RGBToHex(rgb) {
+    // Choose correct separator
+    let sep = rgb.indexOf(",") > -1 ? "," : " ";
+    rgb = rgb.substr(4).split(")")[0].split(sep);
+  
+    let r = (+rgb[0]).toString(16),
+        g = (+rgb[1]).toString(16),
+        b = (+rgb[2]).toString(16);
+  
+    if (r.length == 1)
+      r = "0" + r;
+    if (g.length == 1)
+      g = "0" + g;
+    if (b.length == 1)
+      b = "0" + b;
+  
+    return "#" + r + g + b;
 }
