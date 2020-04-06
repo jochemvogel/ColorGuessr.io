@@ -19,12 +19,15 @@ h1 {
     font-size: 4em;
 }
 
-.rgb-display {
+.display-group {
     font-size: 0.7em;
     text-transform: uppercase;
     font-weight: normal;
-    display: block;
     margin: 1% 0;
+}
+
+.display-group span {
+    margin: 1.5em;
 }
 
 .score {

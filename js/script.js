@@ -1,5 +1,6 @@
-
+let hslDisplay = document.getElementById('hsl-display');
 let rgbDisplay = document.getElementById('rgb-display');
+
 let statusDisplay = document.getElementById('status-message');
 let scoreDisplay = document.getElementById('score');
 let resetButton = document.getElementById('reset');
@@ -105,8 +106,15 @@ function setupSquares() {
 // Pick new color and reset score
 function reset() {
     colors = generateRandomColors(numSquares);
+
     pickedColor = pickColor();
-    rgbDisplay.textContent = pickedColor;
+
+    // Take all individual rgb values from rgb array
+    rgbArray = randomWord.replace(/[^\d,]/g, '').split(',');
+
+    hslDisplay.textContent = RGBtoHSL(rgbArray[0], rgbArray[1], rgbArray[2]); // <-- DISPLAY HSL 
+    rgbDisplay.textContent = pickedColor; // <-- DISPLAY RGB
+
     resetButton.textContent = 'Reset Colors';
     statusDisplay.textContent = '';
     score = 0;
@@ -136,7 +144,11 @@ function changeColors(color) {
 // Pick a random color and this will be the correct color during the game
 function pickColor() {
     let random = Math.floor(Math.random() * colors.length);
-    return colors[random];
+    console.log(`Random rgb color picked: ${colors[random]}`);
+
+    // Make variable, so it can be used outside the function
+    randomWord = colors[random];
+    return randomWord;
 }
 
 // Push random numbers to array
@@ -156,4 +168,55 @@ function randomColor() {
     let g = Math.floor(Math.random() * 256);
     let b = Math.floor(Math.random() * 256);
     return "rgb(" + r + ", " + g + ", " + b + ")";
+}
+
+// Convert RGB values to HSL
+// Thanks to Jon Kantner (CSS-tricks)
+function RGBtoHSL(r, g, b) {
+    // Make r, g and b fractions of 1
+    r /= 255;
+    g /= 255;
+    b /= 255;
+
+    // Find greatest and smallest channel values
+    let cmin = Math.min(r, g, b),
+        cmax = Math.max(r, g, b),
+        delta = cmax - cmin,
+        h = 0,
+        s = 0,
+        l = 0;
+
+    // 1) Calculate HUE
+
+    // No difference
+    if (delta == 0) {
+        h = 0;
+    // Red is max
+    } else if (cmax == r) {
+        h = ((g - b) / delta) % 6;
+    // Green is max
+    } else if (cmax == g) {
+        h = ((b - r) / delta)  + 2;
+    // Blue is max
+    } else {
+        h = (r - g) / delta + 4;
+    }
+
+    h = Math.round(h * 60);
+
+    if (h < 0) {
+        h += 360;
+    }
+
+    // 2) Calculate LIGHTNESS
+    l = (cmax + cmin) / 2;
+
+    // 3) Calculate SATURATION
+    s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+
+    // Multiply l and s by 100
+    s = +(s * 100).toFixed(0);
+    l = +(l * 100).toFixed(0);
+
+    return "hsl(" + h + ", " + s + "%, " + l + "%)";
 }
