@@ -89,3 +89,41 @@ button:hover {
     max-width: 600px;
     margin: 20px auto;
 }
+
+@media screen and (max-width: 430px) {
+    button {
+        font-size: .8em;
+    }
+}
+
+@media screen and (max-width:  700px) {
+    .square {
+        width: 44%;
+        margin: 3% 3%;
+    }
+
+    .stripe {
+        height: 70px;
+    }
+
+    .impossible {
+        display: none;
+        visibility: hidden;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .display-group {
+        display: flex;
+        flex-direction: column;
+        font-size: .5em;
+    }
+
+    .display-group span {
+        margin: 5px;
+    }
+
+    .score {
+        font-size: 24px;
+    }
+}
