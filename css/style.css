@@ -19,7 +19,7 @@ h1 {
     font-size: 4em;
 }
 
-#rgb-display {
+.rgb-display {
     font-size: 0.7em;
     text-transform: uppercase;
     font-weight: normal;
@@ -27,7 +27,7 @@ h1 {
     margin: 1% 0;
 }
 
-#score {
+.score {
     font-size: 0.5em;
     font-weight: normal;
 }
@@ -52,7 +52,7 @@ button:hover {
     background-color: #309D00;
 }
 
-#status-message {
+.status-message {
     display: inline-block;
     width: 20%;
 }
@@ -62,7 +62,7 @@ button:hover {
     color: white;
 }
 
-#stripe {
+.stripe {
     background-color: white;
     height: 35px;
     text-align: center;
@@ -81,7 +81,7 @@ button:hover {
     transition: background 400ms;
 }
 
-#squares {
+.squares {
     max-width: 600px;
     margin: 20px auto;
 }
