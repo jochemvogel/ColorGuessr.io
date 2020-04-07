@@ -29,7 +29,7 @@
             <button id="hex-btn" class="btn hex-btn ">Switch to hex</button>
         </div>
 
-        <h3 id="difficulty" class="difficulty">Your difficulty: <strong>Hard</strong></h3>
+        <h3 id="difficulty-area" class="difficulty-area">Your difficulty: <span class="difficulty-area-span" id='difficulty-area-span'>Hard</span></h3>
         <h2 id="score" class="score">Score: <strong>2</strong> </h2>
         <button id="new-round-btn" class="new-round-btn btn">New round</button>
 
@@ -66,6 +66,36 @@
             <div class="circle"></div>
             <div class="circle"></div>
         </div>
+    </div>
+
+    <div id="start-container" class="start-container show">
+        <h1>
+            ColorGuessr.io
+        </h1>
+
+        <p class="start-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi unde dolor quia. Similique qui nam, dolorum in adipisci molestias pariatur consectetur commodi praesentium earum debitis nostrum quasi esse alias eveniet?</p>
+
+        <p class="start-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda nemo delectus dignissimos earum aliquid sunt tenetur accusantium reiciendis, voluptas magnam.</p>
+
+        <h3 class="start-difficulty">Select difficulty</h3>
+
+        <div class="form-group">
+          <form id="difficulty-form">
+            <div>
+              <label for="difficulty"></label>
+              <select id="difficulty">
+                <option value="Easy">Easy</option>
+                <option value="Medium" selected>Medium</option>
+                <option value="Hard">Hard</option>
+                <option value="Impossible">Impossible</option>
+              </select>
+            </div>
+          </form>
+        </div>
+
+        <button id="btn-start-game" class="btn menu-btn"> 
+          Start game
+        </button>
     </div>
 
     <!-- SCRIPTS -->

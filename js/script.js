@@ -5,22 +5,26 @@ const rgbDisplay = document.getElementById('rgb-display');
 const rgbBtn = document.getElementById('rgb-btn');
 const hslBtn = document.getElementById('hsl-btn');
 const hexBtn = document.getElementById('hex-btn');
+const startBtn = document.getElementById('btn-start-game');
+const startContainer = document.getElementById('start-container');
 
 const newRoundBtn = document.getElementById('new-round-btn');
 
-const statusDisplay = document.getElementById('status-message');
-const scoreDisplay = document.getElementById('score');
 const container = document.getElementById('container');
-
-const h1 = document.querySelector('h1');
+const scoreDisplay = document.getElementById('score');
 
 const circles = document.querySelectorAll('.circle');
 const circleDisplay = document.querySelectorAll('#circles');
+const circleDiv = document.getElementById('circles');
 
 const displayGroup = document.getElementById('display-group');
 const displayGroupEl = document.querySelectorAll('span');
 const btnGroup = document.getElementById('btn-group');
 const btnGroupEl = btnGroup.querySelectorAll('.btn');
+
+const difficultyForm = document.getElementById('difficulty-form');
+const difficultyArea = document.getElementById('difficulty-area-span');
+
 
 let colors = [],
     numCircles = 6,
@@ -29,14 +33,16 @@ let colors = [],
     guesses = 0,
     oneGuess = true;
 
-init();
-
 // Start app
 function init() {
     setupCircles();
     reset();
     updateScore();
 }
+
+// Set difficulty
+const setDifficulty = localStorage.getItem('difficulty') !== null ? localStorage.getItem('difficulty') : 'Medium';
+let difficulty = setDifficulty;
 
 // Update score
 function updateScore() {
@@ -106,6 +112,7 @@ function reset() {
     rgbDisplay.textContent = pickedColor;  // <-- DISPLAY RGB
 
     container.style.backgroundColor = 'var(--bg-color)';
+    circleDiv.style.display = 'block';
     circles.forEach((circle) => circle.style.border = 'none');
     newRoundBtn.style.display = 'none';
 
@@ -117,7 +124,7 @@ function reset() {
         } else {
             circle.style.display = 'none';
         }
-    });
+    })
 };
 
 // Change all circles to same background if answer is correct
@@ -245,3 +252,14 @@ hexBtn.addEventListener('click', () => showButtons('hex'));
 
 newRoundBtn.addEventListener('click', reset);
 
+startBtn.addEventListener('click', () => {
+    startContainer.classList.remove('show');
+    difficultyArea.innerHTML = difficulty;
+    init();
+});
+
+// Difficulty change
+difficultyForm.addEventListener('change', e => {
+    difficulty = e.target.value;
+    localStorage.setItem('difficulty', difficulty);
+});
