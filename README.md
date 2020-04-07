@@ -4,17 +4,17 @@
 
 <a href="https://jochemvogel.nl.nl/"><img src="https://i.ibb.co/McD1Bzx/thinking.png" height= 120 width=120/ align="right"></a>
 
-ColorGuessr is een game voor echte designerds. Er wordt een RGB Color Code gegeven en vervolgens heeft de speler een aantal keuzes (a.d.h.v. het level dat gekozen is).
+ColorGuessr is een game voor echte designerds. Er wordt een HSL Color Code gegeven en vervolgens heeft de speler een aantal keuzes (a.d.h.v. het level dat gekozen is). Tijdens de game kan de gebruiker continu switchen tussen HSL, RGB of HEX. Zo kun je de game spelen voor elke color code.
 
-De huidige levels zijn:
-- Easy (3 squares)
-- Medium (6 squares)
-- Hard (9 squares)
-- Impossible (30 squares)
+De levels zijn:
+- Easy (3 circles)
+- Medium (6 circles)
+- Hard (9 circles)
+- Impossible (30 circles)
 
 ## Toekomst:
 
 In de toekomst lijkt het mij leuk om een werkend punten systeem te krijgen. Elk level heeft zo zijn eigen punten, waardoor het een echt werkend spel wordt. Deze punten worden opgeslagen in localStorage, zodat deze zichtbaar blijven.
 
-Naast het maken van de keuze in moeilijkheid, wil ik gebruikers ook de keuze geven in het kiezen van de manier waarop kleur weergeven wordt: RGB, HSL of HEX. 
+Momenteel bezig met het redesignen van de app, waardoor er een paar functionaliteiten op de verkeerde plek staan. Hierdoor is het kiezen van de levels tijdelijk niet meer mogelijk.
 

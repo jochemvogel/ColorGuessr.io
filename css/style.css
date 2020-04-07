@@ -8,11 +8,11 @@
     --boxshadow-color: hsla(220, 63%, 16%, 1%);
   }
   
-  * {
+* {
     box-sizing: border-box;
-  }
+}
   
-  body {
+body {
     font-family: 'Nunito', sans-serif;
     background-color: var(--bg-color);
     display: flex;
@@ -21,34 +21,38 @@
     align-items: center;
     min-height: 100vh;
     margin: 0;
-  }
-  
-  h1 {
+}
+
+h1 {
     font-size: 56px;
     text-align: center;
     color: var(--font-color-light);
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     margin-top: 30px;
-  }
+}
   
-  h2 {
+h2 {
     font-family: 'Montserrat', sans-serif;
     font-size: 32px;
     text-align: center;
     color: var(--font-color-light);
-
     padding: 8px;
     border-radius: 4px;
     margin: 0 0 40px;
-  }
+}
   
-  h3 {
+h3 {
     font-family: 'Montserrat', sans-serif;
     font-size: 24px;
     text-align: center;
     color: var(--font-color-light);
-  }
+}
+
+.container {
+    min-height: 100vh;    
+    min-width: 100vw;
+}
 
 .display-group {
     font-size: 0.7em;
@@ -66,12 +70,6 @@
 .display-group span:not(.selected-display) {
     display: none;
 }
-
-.container {
-    min-height: 100vh;    
-    min-width: 100vw;
-}
-
 
 .button-group {
     display: flex;
@@ -109,21 +107,21 @@
     background-color: var(--font-color-light);
 }
 
-.status-message {
-    display: inline-block;
-    width: 20%;
+.difficulty {
+    margin: 20px 0;
+}
+
+.new-round-btn {
+    position: absolute;
+    left: 30%;
+    top: 40%;
+    font-style: normal;
+    display: none;
 }
 
 .selected {
     background-color: hsl(102, 100%, 31%);
     color: hsl(0, 0%, 100%);
-}
-
-.stripe {
-    background-color: hsl(0, 0%, 100%);
-    height: 35px;
-    text-align: center;
-    color: hsl(0, 0%, 0%);
 }
 
 /* CIRCLES */

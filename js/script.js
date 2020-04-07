@@ -6,6 +6,8 @@ const rgbBtn = document.getElementById('rgb-btn');
 const hslBtn = document.getElementById('hsl-btn');
 const hexBtn = document.getElementById('hex-btn');
 
+const newRoundBtn = document.getElementById('new-round-btn');
+
 const statusDisplay = document.getElementById('status-message');
 const scoreDisplay = document.getElementById('score');
 const container = document.getElementById('container');
@@ -43,23 +45,25 @@ function updateScore() {
 
 // Set up the circles
 function setupCircles() {
-    circles.forEach((circle, index) => {
+    circles.forEach((circle) => {
         circle.addEventListener('click', function() {
             let clickedColor = this.style.backgroundColor;
 
             if(clickedColor == pickedColor) {
-                score++;
-                updateScore();
-                changeColors(clickedColor);
-                container.style.backgroundColor = clickedColor;
-                circles.forEach((circle) => circle.style.border = '2px solid hsla(210, 36%, 96%, .4)');
+                // Make it not possible to click circles twice
+                if(newRoundBtn.style.display === 'none') {
+                    score++;
+                    updateScore();
+                    changeColors(clickedColor);
+                    container.style.backgroundColor = clickedColor;
+                    circles.forEach((circle) => circle.style.border = '2px solid hsla(210, 36%, 96%, .7)');
+                    newRoundBtn.style.display = 'block';
+                }
             }
-
             // If clickedColor !== pickedColor
             else {
                 this.style.backgroundColor = 'hsl(209, 28%, 39%)';
                 this.style.border = 'none';
-                // statusDisplay.textContent = 'Try Again';
                 score = 0;
                 updateScore();
                 oneGuess = false;
@@ -101,6 +105,11 @@ function reset() {
     hexDisplay.textContent = RGBToHex(pickedColor);
     rgbDisplay.textContent = pickedColor;  // <-- DISPLAY RGB
 
+    container.style.backgroundColor = 'var(--bg-color)';
+    circles.forEach((circle) => circle.style.border = 'none');
+    newRoundBtn.style.display = 'none';
+
+    // Refactor this function, so hard codes circles will be replaced by Javascript
     circles.forEach((circle, index) => {
         if(colors[index]) {
             circle.style.display = 'block';
@@ -233,4 +242,6 @@ function RGBToHex(rgb) {
 rgbBtn.addEventListener('click', () => showButtons('rgb'));
 hslBtn.addEventListener('click', () => showButtons('hsl'));
 hexBtn.addEventListener('click', () => showButtons('hex'));
+
+newRoundBtn.addEventListener('click', reset);
 
