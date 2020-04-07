@@ -25,24 +25,44 @@ const btnGroupEl = btnGroup.querySelectorAll('.btn');
 const difficultyForm = document.getElementById('difficulty-form');
 const difficultyArea = document.getElementById('difficulty-area-span');
 
-
 let colors = [],
-    numCircles = 6,
+    numCircles,
+    difficulty,
     pickedColor,
     score = 0,
     guesses = 0,
     oneGuess = true;
 
+    
+// Set difficulty
+const setDifficulty = localStorage.getItem('difficulty') !== null ? localStorage.getItem('difficulty') : 'Easy';
+difficulty = setDifficulty;
+
 // Start app
 function init() {
+    selectDifficulty();
     setupCircles();
     reset();
     updateScore();
+    difficultyLS();
 }
 
-// Set difficulty
-const setDifficulty = localStorage.getItem('difficulty') !== null ? localStorage.getItem('difficulty') : 'Medium';
-let difficulty = setDifficulty;
+// Create the right amount of circles per difficulty
+function selectDifficulty() {
+    switch(difficulty) {
+        case 'Easy':
+            numCircles = 3;
+            break;
+        case 'Medium':
+            numCircles = 6;
+            break;
+        case 'Hard':
+            numCircles = 9;
+            break;
+        default:
+            numCircles = 30;
+    }
+}
 
 // Update score
 function updateScore() {
@@ -135,7 +155,6 @@ function changeColors(color) {
 // Pick a random color and this will be the correct color during the game
 function pickColor() {
     let random = Math.floor(Math.random() * colors.length);
-    console.log(`Random rgb color picked: ${colors[random]}`);
 
     // Make variable, so it can be used outside the function
     randomWord = colors[random];
@@ -158,6 +177,15 @@ function randomColor() {
     let g = Math.floor(Math.random() * 256);
     let b = Math.floor(Math.random() * 256);
     return "rgb(" + r + ", " + g + ", " + b + ")";
+}
+
+// Not working yet --> difficulty that's stored in localStorage has to be pre selected
+function difficultyLS() {
+    if(difficulty) {
+        document.getElementById('Medium').selected = 'true';
+        document.getElementById('Medium').classList.add = 'true';
+        console.log(typeof difficulty);
+    }
 }
 
 /*
