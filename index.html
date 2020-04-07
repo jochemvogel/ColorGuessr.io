@@ -7,65 +7,64 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css?family=Khand&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Nunito:100,300,400,700&display=swap" rel="stylesheet">
     <link rel="shortcut icon" type="image/png" href="img/thinking.png"/>
 
     <title>ColorGuessr</title>
 </head>
 
 <body>
-    <h1>ColorGuessr.io
-        <div class="display-group">
-            <span id="hsl-display" class="hsl-display">HSL</span>
+    <div class="container" id="container">
+        <h1>ColorGuessr.io</h1>
+        <div id="display-group" class="display-group">
+            <span id="hsl-display" class="hsl-display selected-display">HSL</span>
             <span id="hex-display" class="hex-display">#</span>
             <span id="rgb-display" class="rgb-display">RGB</span>
         </div>
-        <span id="score" class="score">Score: </span>
-    </h1>
 
-    <div id="stripe" class="stripe">
-        <button id="reset">Reset Colors</button>
-        <span id="status-message" class="status-message"></span>
-
-        <!-- LEVEL BUTTONS -->
-        <button class="level">Easy</button>
-        <button class="level selected">Medium</button>
-        <button class="level">Hard</button>
-        <button class="level impossible">Impossible</button>
+        <div id="btn-group" class="button-group">
+            <button id="rgb-btn" class="btn rgb-btn">Switch to rgb</button>
+            <button id="hsl-btn" class="btn hsl-btn selected-btn">Switch to hsl</button>
+            <button id="hex-btn" class="btn hex-btn ">Switch to hex</button>
         </div>
 
-    <!-- SQUARE CREATION -->
-    <div id="squares" class="squares">
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
+        <h3 id="difficulty" class="difficulty">Your difficulty: <strong>Hard</strong></h3>
+        <h2 id="score" class="score">Score: <strong>2</strong> </h2>
+
+        <!-- Circle CREATION -->
+        <div id="circles" class="circles">
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+        </div>
     </div>
 
     <!-- SCRIPTS -->

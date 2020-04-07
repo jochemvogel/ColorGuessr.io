@@ -2,18 +2,26 @@ const hslDisplay = document.getElementById('hsl-display');
 const hexDisplay = document.getElementById('hex-display');
 const rgbDisplay = document.getElementById('rgb-display');
 
+const rgbBtn = document.getElementById('rgb-btn');
+const hslBtn = document.getElementById('hsl-btn');
+const hexBtn = document.getElementById('hex-btn');
+
 const statusDisplay = document.getElementById('status-message');
 const scoreDisplay = document.getElementById('score');
-const resetButton = document.getElementById('reset');
+const container = document.getElementById('container');
 
 const h1 = document.querySelector('h1');
 
-const levelButtons = document.querySelectorAll('.level');
-const squares = document.querySelectorAll('.square');
-const squaresDisplay = document.querySelectorAll('#squares');
+const circles = document.querySelectorAll('.circle');
+const circleDisplay = document.querySelectorAll('#circles');
+
+const displayGroup = document.getElementById('display-group');
+const displayGroupEl = document.querySelectorAll('span');
+const btnGroup = document.getElementById('btn-group');
+const btnGroupEl = btnGroup.querySelectorAll('.btn');
 
 let colors = [],
-    numSquares = 6,
+    numCircles = 6,
     pickedColor,
     score = 0,
     guesses = 0,
@@ -23,8 +31,7 @@ init();
 
 // Start app
 function init() {
-    setupLevelButtons();
-    setupSquares();
+    setupCircles();
     reset();
     updateScore();
 }
@@ -34,78 +41,59 @@ function updateScore() {
     scoreDisplay.textContent = 'Score: ' + score;
 }
 
-// Make level buttons work
-function setupLevelButtons() {
-    levelButtons.forEach((item) => {
-        item.addEventListener('click', function() {
-            levelButtons[0].classList.remove('selected');
-            levelButtons[1].classList.remove('selected');
-            levelButtons[2].classList.remove('selected');
-            levelButtons[3].classList.remove('selected');
-            this.classList.add('selected');
-            if(this.textContent === 'Easy') {
-                numSquares = 3;
-            } else if (this.textContent === 'Medium') {
-                numSquares = 6;
-            } else if (this.textContent === 'Hard') {
-                numSquares = 9;
-            } else {
-                numSquares = 30;
-            }
-            reset();
-        });
-    });
-}
-
-// Set up the squares
-function setupSquares() {
-    squares.forEach((square, index) => {
-        square.addEventListener('click', function() {
+// Set up the circles
+function setupCircles() {
+    circles.forEach((circle, index) => {
+        circle.addEventListener('click', function() {
             let clickedColor = this.style.backgroundColor;
 
             if(clickedColor == pickedColor) {
-
-                // Impossible level
-                if(levelButtons[3].classList.contains('selected')) {
-
-                    // In one guess (not working yet)
-                    if(guesses === 0) {
-                        statusDisplay.textContent = 'OK, you\'re a designerd';
-                        resetButton.textContent = 'Play Again?';
-                        score++;
-                        changeColors(clickedColor);
-                        h1.style.backgroundColor = clickedColor;
-                    // In more than one guess
-                    } else {
-                        statusDisplay.textContent = 'Correct!';
-                        resetButton.textContent = 'Play Again?';
-                        score++;
-                        changeColors(clickedColor);
-                        h1.style.backgroundColor = clickedColor;
-                    }
-
-                // Easy, medium and hard level
-                } else 
-                    statusDisplay.textContent = 'Correct!';
-                    resetButton.textContent = 'Play Again?';
-                    score++;
-                    changeColors(clickedColor);
-                    h1.style.backgroundColor = clickedColor;
+                score++;
+                updateScore();
+                changeColors(clickedColor);
+                container.style.backgroundColor = clickedColor;
+                circles.forEach((circle) => circle.style.border = '2px solid hsla(210, 36%, 96%, .4)');
+            }
 
             // If clickedColor !== pickedColor
-            } else {
-                this.style.backgroundColor = '#232323';
-                statusDisplay.textContent = 'Try Again';
+            else {
+                this.style.backgroundColor = 'hsl(209, 28%, 39%)';
+                this.style.border = 'none';
+                // statusDisplay.textContent = 'Try Again';
                 score = 0;
+                updateScore();
                 oneGuess = false;
             } 
         })
     });
 }
 
+// Show switch buttons and make them work
+function showButtons(button) {
+    displayGroupEl.forEach((item) => item.classList.remove('selected-display'));
+    btnGroupEl.forEach((item) => item.classList.remove('selected-btn'));
+
+    switch(button) {
+        case 'rgb':
+            rgbDisplay.classList.add('selected-display');
+            rgbBtn.classList.add('selected-btn');
+            break;
+        case 'hsl':
+            hslDisplay.classList.add('selected-display');
+            hslBtn.classList.add('selected-btn');
+            break;
+        case 'hex':
+            hexDisplay.classList.add('selected-display');
+            hexBtn.classList.add('selected-btn');;
+            break;
+        default:
+            alert('Error..');
+    }
+}
+
 // Pick new color and reset score
 function reset() {
-    colors = generateRandomColors(numSquares);
+    colors = generateRandomColors(numCircles);
 
     pickedColor = pickColor();
 
@@ -113,30 +101,19 @@ function reset() {
     hexDisplay.textContent = RGBToHex(pickedColor);
     rgbDisplay.textContent = pickedColor;  // <-- DISPLAY RGB
 
-    resetButton.textContent = 'Reset Colors';
-    statusDisplay.textContent = '';
-    score = 0;
-    oneGuess = true;
-
-    squares.forEach((square, index) => {
+    circles.forEach((circle, index) => {
         if(colors[index]) {
-            square.style.display = 'block';
-            square.style.backgroundColor = colors[index];
+            circle.style.display = 'block';
+            circle.style.backgroundColor = colors[index];
         } else {
-            square.style.display = 'none';
+            circle.style.display = 'none';
         }
     });
+};
 
-    h1.style.background = '#309D00';
-    }
-    
-    resetButton.addEventListener('click', function() {
-        reset();
-});
-
-// Change all squares to same background if answer is correct
+// Change all circles to same background if answer is correct
 function changeColors(color) {
-    squares.forEach(item => item.style.backgroundColor = color);
+    circles.forEach(item => item.style.backgroundColor = color);
 }
 
 // Pick a random color and this will be the correct color during the game
@@ -155,9 +132,8 @@ function generateRandomColors(num) {
     for(var i = 0; i < num; i++) {
         arr.push(randomColor());
     }
-    
-    return arr;
 
+    return arr;
 }
 
 // Create random rgb color
@@ -251,3 +227,10 @@ function RGBToHex(rgb) {
   
     return "#" + r + g + b;
 }
+
+// EVENT LISTENERS
+
+rgbBtn.addEventListener('click', () => showButtons('rgb'));
+hslBtn.addEventListener('click', () => showButtons('hsl'));
+hexBtn.addEventListener('click', () => showButtons('hex'));
+

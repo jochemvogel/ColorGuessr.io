@@ -1,59 +1,112 @@
-/* ELEMENTS */
-
-body {
-    background-color: hsl(0, 0%, 14%);
+:root {
+    --font-color-light: hsl(210, 36%, 96%);
+    --font-color-dark: hsl(209, 61%, 16%);
+    --bg-color: hsl(209, 28%, 39%);
+    --bg-color-light: hsl(209, 23%, 60%);
+    --button-bg-color: hsl(199, 84%, 55%);
+    --placeholder-color: hsl(210, 31%, 80%);
+    --boxshadow-color: hsla(220, 63%, 16%, 1%);
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Nunito', sans-serif;
+    background-color: var(--bg-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
     margin: 0;
-    font-family: 'Khand', sans-serif;
-}
-
-/* HEADER */
-
-h1 {
+  }
+  
+  h1 {
+    font-size: 56px;
     text-align: center;
-    color: hsl(0, 0%, 100%);
-    line-height: 1.1;
-    padding: 20px 0;
-    background-color: hsl(102, 100%, 31%);
-    margin: 0;
+    color: var(--font-color-light);
+    font-family: 'Montserrat', sans-serif;
     font-weight: 700;
-    font-size: 4em;
-}
+    margin-top: 30px;
+  }
+  
+  h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 32px;
+    text-align: center;
+    color: var(--font-color-light);
+
+    padding: 8px;
+    border-radius: 4px;
+    margin: 0 0 40px;
+  }
+  
+  h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    text-align: center;
+    color: var(--font-color-light);
+  }
 
 .display-group {
     font-size: 0.7em;
+    text-align: center;
     text-transform: uppercase;
     font-weight: normal;
-    margin: 1% 0;
 }
 
 .display-group span {
-    margin: 1em;
+    color: var(--font-color-light);
+    font-size: 32px;
+    font-weight: 300;
+}
+
+.display-group span:not(.selected-display) {
+    display: none;
+}
+
+.container {
+    min-height: 100vh;    
+    min-width: 100vw;
 }
 
 
-.score {
-    font-size: 0.5em;
-    font-weight: normal;
+.button-group {
+    display: flex;
+    justify-content: center;
 }
 
-/* STRIPE */
+.button-group .btn {
+    margin: 20px 40px;
+}
 
-button {
+.selected-btn {
+    display: none;
+}
+
+.btn {
+    font-size: 14px;
+    font-family: 'Nunito', sans-serif;
+    font-style: italic;
+    cursor: pointer;
+    color: var(--font-color-light);
+    background-color: var(--button-bg-color);
     border: none;
-    background-color: none;
-    text-transform: uppercase;
-    height: 100%;
-    font-weight: 700;
-    color: hsl(102, 100%, 31%);
-    letter-spacing: 1.2px;
-    font-size: 1.3em;
-    transition: all 0.5s;
-    outline: none;
+    border-radius: 7px;
+    margin-top: 35px;
+    padding: 10px 15px;
+    box-shadow: 0px 4px 6px var(--boxshadow-color);
+  }
+  
+.btn:active {
+    transform: scale(.9)
 }
 
-button:hover {
-    color: hsl(0, 0%, 100%);
-    background-color: hsl(102, 100%, 31%);
+.btn:hover {
+    color: var(--button-bg-color);
+    background-color: var(--font-color-light);
 }
 
 .status-message {
@@ -73,57 +126,37 @@ button:hover {
     color: hsl(0, 0%, 0%);
 }
 
-/* SQUARES */
+/* CIRCLES */
 
-.square {
+.circle {
     width: 30%;
+    border-radius: 50%;
     background: papayawhip;
     padding-bottom: 30%;
     float: left;
     margin: 1.66%;
-    border-radius: 10%;
     transition: background 400ms;
 }
 
-.squares {
+.circles {
+    display: block;
     max-width: 600px;
     margin: 20px auto;
 }
 
-@media screen and (max-width: 430px) {
-    button {
-        font-size: .8em;
-    }
-}
+/* MEDIA QUERIES */
 
-@media screen and (max-width:  700px) {
-    .square {
-        width: 44%;
-        margin: 3% 3%;
-    }
+/*
 
-    .stripe {
-        height: 70px;
-    }
+Until (max-width: 500px) no problemos
 
-    .impossible {
-        display: none;
-        visibility: hidden;
-    }
-}
+*/
 
-@media screen and (max-width: 1000px) {
-    .display-group {
-        display: flex;
-        flex-direction: column;
-        font-size: .5em;
-    }
-
-    .display-group span {
-        margin: 5px;
-    }
-
-    .score {
-        font-size: 24px;
+@media screen and (max-width: 500px) {
+    .circle {
+        width: 30%;
+        padding: 20%;
+        height: 100%;
+        margin: 5%;
     }
 }
