@@ -7,6 +7,10 @@ const hslBtn = document.getElementById('hsl-btn');
 const hexBtn = document.getElementById('hex-btn');
 const startBtn = document.getElementById('btn-start-game');
 const startContainer = document.getElementById('start-container');
+const endContainer = document.getElementById('end-container');
+
+const endScore = document.getElementById('end-score');
+const endBtn = document.getElementById('btn-end-game');
 
 const newRoundBtn = document.getElementById('new-round-btn');
 
@@ -24,16 +28,17 @@ const btnGroupEl = btnGroup.querySelectorAll('.btn');
 
 const difficultyForm = document.getElementById('difficulty-form');
 const difficultyArea = document.getElementById('difficulty-area-span');
+const lifesArea = document.getElementById('lifes-area-span');
 
 let colors = [],
     numCircles,
     difficulty,
     pickedColor,
     score = 0,
+    lifes = 3,
     guesses = 0,
     oneGuess = true;
 
-    
 // Set difficulty
 const setDifficulty = localStorage.getItem('difficulty') !== null ? localStorage.getItem('difficulty') : 'Easy';
 difficulty = setDifficulty;
@@ -69,6 +74,16 @@ function updateScore() {
     scoreDisplay.textContent = 'Score: ' + score;
 }
 
+// Decrease amount of lifes after each wrong answer
+function updateLifes() {
+    if(lifes > 1) {
+        lifes--;
+        lifesArea.innerHTML = lifes;
+    } else {
+        gameOver();
+    }   
+}
+
 // Set up the circles
 function setupCircles() {
     circles.forEach((circle) => {
@@ -88,10 +103,12 @@ function setupCircles() {
             }
             // If clickedColor !== pickedColor
             else {
+                updateLifes();
+                updateScore();
+
                 this.style.backgroundColor = 'hsl(209, 28%, 39%)';
                 this.style.border = 'none';
-                score = 0;
-                updateScore();
+
                 oneGuess = false;
             } 
         })
@@ -147,6 +164,12 @@ function reset() {
     })
 };
 
+// User has 0 lifes --> End screen
+function gameOver() {
+    endScore.innerHTML = score;
+    endContainer.style.display = 'flex';
+}
+
 // Change all circles to same background if answer is correct
 function changeColors(color) {
     circles.forEach(item => item.style.backgroundColor = color);
@@ -181,11 +204,12 @@ function randomColor() {
 
 // Not working yet --> difficulty that's stored in localStorage has to be pre selected
 function difficultyLS() {
-    if(difficulty) {
-        document.getElementById('Medium').selected = 'true';
-        document.getElementById('Medium').classList.add = 'true';
-        console.log(typeof difficulty);
-    }
+    // if(difficulty) {
+    //     document.getElementById('Medium').selected = 'true';
+    //     document.getElementById('Medium').classList.add = 'true';
+    //     console.log(typeof difficulty);
+    // }
+    return true;
 }
 
 /*
@@ -285,6 +309,8 @@ startBtn.addEventListener('click', () => {
     difficultyArea.innerHTML = difficulty;
     init();
 });
+
+endBtn.addEventListener('click', () => location.reload());
 
 // Difficulty change
 difficultyForm.addEventListener('change', e => {

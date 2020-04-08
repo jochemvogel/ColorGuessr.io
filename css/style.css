@@ -6,7 +6,7 @@
     --button-bg-color: hsl(199, 84%, 55%);
     --placeholder-color: hsl(210, 31%, 80%);
     --boxshadow-color: hsla(220, 63%, 16%, 1%);
-  }
+}
   
 * {
     box-sizing: border-box;
@@ -136,6 +136,18 @@ select {
     margin: 20px 0;
 }
 
+.difficulty-area-span {
+    font-weight: 700;
+}
+
+.lifes-area {
+    margin: 20px 0;
+}
+
+.lifes-area-span {
+    font-weight: 700;
+}
+
 .new-round-btn {
     font-style: normal;
     position: absolute;
@@ -184,18 +196,34 @@ select {
     width: 100%;
     transition: .3s ease;
     min-height: 100vh;
-  }
-  
-  .start-container.show {
+}
+
+.start-container.show {
     opacity: 1;
     z-index: 2;
-  }
-  
-  .start-description {
+}
+
+.start-description {
     max-width: 500px;
     text-align: center;
     margin: 25px 0px;
-  }
+}
+
+.end-container {
+    display: flex;
+    background-color: var(--bg-color);
+    color: var(--font-color-light);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
 
 /* MEDIA QUERIES */
 

@@ -16,5 +16,7 @@ De levels zijn:
 
 In de toekomst lijkt het mij leuk om een werkend punten systeem te krijgen. Elk level heeft zo zijn eigen punten, waardoor het een echt werkend spel wordt. Deze punten worden opgeslagen in localStorage, zodat deze zichtbaar blijven.
 
-Momenteel bezig met het redesignen van de app, waardoor er een paar functionaliteiten op de verkeerde plek staan. Hierdoor is het kiezen van de levels tijdelijk niet meer mogelijk.
+Op het moment dat iemand de kleur in 1 keer raad, dan krijgt deze er drie punten bij. 
+
+Daarnaast wil ik extra functionaliteit aan de hartjes/levens toevoegen. Wanneer iemand drie keer achter elkaar de juiste kleur raad, komt er een extra leven bij.
 
