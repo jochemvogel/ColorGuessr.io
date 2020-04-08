@@ -48,7 +48,7 @@ function init() {
     selectDifficulty();
     setupCircles();
     reset();
-    updateScore();
+    
     difficultyLS();
 }
 
@@ -71,6 +71,21 @@ function selectDifficulty() {
 
 // Update score
 function updateScore() {
+    switch (difficulty) {
+        case 'Easy':
+            score++;
+            console.log('this');
+            break;
+        case 'Medium':
+            score += 2;
+            break;
+        case 'Hard':
+            score += 5;
+            break;
+        case 'Impossible':
+            score += 10;
+            break;
+    }
     scoreDisplay.textContent = 'Score: ' + score;
 }
 
@@ -93,7 +108,6 @@ function setupCircles() {
             if(clickedColor == pickedColor) {
                 // Make it not possible to click circles twice
                 if(newRoundBtn.style.display === 'none') {
-                    score++;
                     updateScore();
                     changeColors(clickedColor);
                     container.style.backgroundColor = clickedColor;
@@ -104,7 +118,6 @@ function setupCircles() {
             // If clickedColor !== pickedColor
             else {
                 updateLifes();
-                updateScore();
 
                 this.style.backgroundColor = 'hsl(209, 28%, 39%)';
                 this.style.border = 'none';
@@ -153,6 +166,8 @@ function reset() {
     circles.forEach((circle) => circle.style.border = 'none');
     newRoundBtn.style.display = 'none';
 
+    scoreDisplay.textContent = 'Score: ' + score;
+
     // Refactor this function, so hard codes circles will be replaced by Javascript
     circles.forEach((circle, index) => {
         if(colors[index]) {
@@ -168,6 +183,7 @@ function reset() {
 function gameOver() {
     endScore.innerHTML = score;
     endContainer.style.display = 'flex';
+    circleDiv.style.display = 'none';
 }
 
 // Change all circles to same background if answer is correct
