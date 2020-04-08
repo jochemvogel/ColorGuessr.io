@@ -6,29 +6,29 @@ const rgbBtn = document.getElementById('rgb-btn');
 const hslBtn = document.getElementById('hsl-btn');
 const hexBtn = document.getElementById('hex-btn');
 const startBtn = document.getElementById('btn-start-game');
+const endBtn = document.getElementById('btn-end-game');
+const newRoundBtn = document.getElementById('new-round-btn');
+
+const container = document.getElementById('container');
 const startContainer = document.getElementById('start-container');
 const endContainer = document.getElementById('end-container');
 
 const endScore = document.getElementById('end-score');
-const endBtn = document.getElementById('btn-end-game');
-
-const newRoundBtn = document.getElementById('new-round-btn');
-
-const container = document.getElementById('container');
-const scoreDisplay = document.getElementById('score');
 
 const circles = document.querySelectorAll('.circle');
 const circleDisplay = document.querySelectorAll('#circles');
 const circleDiv = document.getElementById('circles');
 
-const displayGroup = document.getElementById('display-group');
-const displayGroupEl = document.querySelectorAll('span');
-const btnGroup = document.getElementById('btn-group');
+const displayColorGroup = document.getElementById('display-color-group');
+const displayColorGroupEl = document.querySelectorAll('span');
+const btnGroup = document.getElementById('button-group');
 const btnGroupEl = btnGroup.querySelectorAll('.btn');
 
-const difficultyForm = document.getElementById('difficulty-form');
-const difficultyArea = document.getElementById('difficulty-area-span');
-const lifesArea = document.getElementById('lifes-area-span');
+const difficultySelect = document.getElementById('difficulty-select');
+
+const displayDifficulty = document.getElementById('display-difficulty');
+const displayLifes = document.getElementById('display-lifes');
+const displayScore = document.getElementById('display-score');
 
 let colors = [],
     numCircles,
@@ -47,8 +47,8 @@ difficulty = setDifficulty;
 function init() {
     selectDifficulty();
     setupCircles();
+    displayLifes.innerHTML = `Lifes: <strong>${lifes}</strong>`; // <-- Replace this with new function
     reset();
-    
     difficultyLS();
 }
 
@@ -69,34 +69,28 @@ function selectDifficulty() {
     }
 }
 
-// Update score
-function updateScore() {
-    switch (difficulty) {
-        case 'Easy':
-            score++;
-            console.log('this');
-            break;
-        case 'Medium':
-            score += 2;
-            break;
-        case 'Hard':
-            score += 5;
-            break;
-        case 'Impossible':
-            score += 10;
-            break;
-    }
-    scoreDisplay.textContent = 'Score: ' + score;
+// Change all circles to same background if answer is correct
+function changeColors(color) {
+    circles.forEach(item => item.style.backgroundColor = color);
 }
 
-// Decrease amount of lifes after each wrong answer
-function updateLifes() {
-    if(lifes > 1) {
-        lifes--;
-        lifesArea.innerHTML = lifes;
-    } else {
-        gameOver();
-    }   
+// Pick a random color and this will be the correct color during the game
+function pickColor() {
+    let random = Math.floor(Math.random() * colors.length);
+
+    // Make variable, so it can be used outside the function
+    randomWord = colors[random];
+    return randomWord;
+}
+
+// Push random numbers to array
+function generateRandomColors(num) {
+    let arr = []
+    for(var i = 0; i < num; i++) {
+        arr.push(randomColor());
+    }
+
+    return arr;
 }
 
 // Set up the circles
@@ -128,9 +122,39 @@ function setupCircles() {
     });
 }
 
+// Update score
+function updateScore() {
+    switch (difficulty) {
+        case 'Easy':
+            score++;
+            console.log('this');
+            break;
+        case 'Medium':
+            score += 2;
+            break;
+        case 'Hard':
+            score += 5;
+            break;
+        case 'Impossible':
+            score += 10;
+            break;
+    }
+    displayScore.textContent = 'Score: ' + score;
+}
+
+// Decrease amount of lifes after each wrong answer
+function updateLifes() {
+    if(lifes > 1) {
+        lifes--;
+        displayLifes.innerHTML = `Lifes: <strong>${lifes}</strong>`;
+    } else {
+        gameOver();
+    }   
+}
+
 // Show switch buttons and make them work
 function showButtons(button) {
-    displayGroupEl.forEach((item) => item.classList.remove('selected-display'));
+    displayColorGroupEl.forEach((item) => item.classList.remove('selected-display'));
     btnGroupEl.forEach((item) => item.classList.remove('selected-btn'));
 
     switch(button) {
@@ -151,6 +175,14 @@ function showButtons(button) {
     }
 }
 
+// Create random rgb color
+function randomColor() {
+    let r = Math.floor(Math.random() * 256);
+    let g = Math.floor(Math.random() * 256);
+    let b = Math.floor(Math.random() * 256);
+    return "rgb(" + r + ", " + g + ", " + b + ")";
+}
+
 // Pick new color and reset score
 function reset() {
     colors = generateRandomColors(numCircles);
@@ -166,7 +198,7 @@ function reset() {
     circles.forEach((circle) => circle.style.border = 'none');
     newRoundBtn.style.display = 'none';
 
-    scoreDisplay.textContent = 'Score: ' + score;
+    displayScore.textContent = 'Score: ' + score;
 
     // Refactor this function, so hard codes circles will be replaced by Javascript
     circles.forEach((circle, index) => {
@@ -181,42 +213,12 @@ function reset() {
 
 // User has 0 lifes --> End screen
 function gameOver() {
-    endScore.innerHTML = score;
+    endScore.innerHTML = `Your final score is: <strong>${score}</strong`;
     endContainer.style.display = 'flex';
     circleDiv.style.display = 'none';
 }
 
-// Change all circles to same background if answer is correct
-function changeColors(color) {
-    circles.forEach(item => item.style.backgroundColor = color);
-}
 
-// Pick a random color and this will be the correct color during the game
-function pickColor() {
-    let random = Math.floor(Math.random() * colors.length);
-
-    // Make variable, so it can be used outside the function
-    randomWord = colors[random];
-    return randomWord;
-}
-
-// Push random numbers to array
-function generateRandomColors(num) {
-    let arr = []
-    for(var i = 0; i < num; i++) {
-        arr.push(randomColor());
-    }
-
-    return arr;
-}
-
-// Create random rgb color
-function randomColor() {
-    let r = Math.floor(Math.random() * 256);
-    let g = Math.floor(Math.random() * 256);
-    let b = Math.floor(Math.random() * 256);
-    return "rgb(" + r + ", " + g + ", " + b + ")";
-}
 
 // Not working yet --> difficulty that's stored in localStorage has to be pre selected
 function difficultyLS() {
@@ -293,6 +295,7 @@ function RGBtoHSL(rgb) {
     return "hsl(" + h + ", " + s + "%, " + l + "%)";
 }
 
+// Convert RGB values to HEX
 function RGBToHex(rgb) {
     // Choose correct separator
     let sep = rgb.indexOf(",") > -1 ? "," : " ";
@@ -314,22 +317,26 @@ function RGBToHex(rgb) {
 
 // EVENT LISTENERS
 
+// Color shades buttons
 rgbBtn.addEventListener('click', () => showButtons('rgb'));
 hslBtn.addEventListener('click', () => showButtons('hsl'));
 hexBtn.addEventListener('click', () => showButtons('hex'));
 
+// 'New round' button after giving correct answer
 newRoundBtn.addEventListener('click', reset);
 
+// 'Start game' on start screen
 startBtn.addEventListener('click', () => {
     startContainer.classList.remove('show');
-    difficultyArea.innerHTML = difficulty;
+    displayDifficulty.innerHTML = `Your difficulty: <strong>${difficulty}</strong>`;
     init();
 });
 
+// 'Back to menu' button on end screen
 endBtn.addEventListener('click', () => location.reload());
 
 // Difficulty change
-difficultyForm.addEventListener('change', e => {
+difficultySelect.addEventListener('change', e => {
     difficulty = e.target.value;
     localStorage.setItem('difficulty', difficulty);
 });
