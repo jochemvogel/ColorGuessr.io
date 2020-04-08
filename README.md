@@ -4,7 +4,7 @@
 
 <a href="https://jochemvogel.nl.nl/"><img src="https://i.ibb.co/McD1Bzx/thinking.png" height= 120 width=120/ align="right"></a>
 
-ColorGuessr is een game voor echte designerds. Er wordt een HSL Color Code gegeven en vervolgens heeft de speler een aantal keuzes (a.d.h.v. het level dat gekozen is). Tijdens de game kan de gebruiker continu switchen tussen HSL, RGB of HEX. Zo kun je de game spelen voor elke color code.
+ColorGuessr is een game voor echte designerds. Er wordt een HSL color space gegeven en vervolgens heeft de gebruiker een aantal keuzes (a.d.h.v. het level dat gekozen is). Tijdens de game kan de gebruiker continu switchen tussen HSL, RGB of HEX. Zo kun je de game spelen voor elke color space.
 
 De levels zijn:
 - Easy (3 circles)
@@ -16,7 +16,9 @@ De levels zijn:
 
 In de toekomst lijkt het mij leuk om een werkend punten systeem te krijgen. Elk level heeft zo zijn eigen punten, waardoor het een echt werkend spel wordt. Deze punten worden opgeslagen in localStorage, zodat deze zichtbaar blijven.
 
-Op het moment dat iemand de kleur in 1 keer raad, dan krijgt deze er drie punten bij. 
+Op het moment dat iemand de kleur in 1 keer raad, krijgt deze er drie punten bij. 
 
 Daarnaast wil ik extra functionaliteit aan de hartjes/levens toevoegen. Wanneer iemand drie keer achter elkaar de juiste kleur raad, komt er een extra leven bij.
+
+Circles staan momenteel nog hardcodes in html, maar deze wil ik uiteindelijk genereren in Javascript.
 
