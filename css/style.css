@@ -114,7 +114,7 @@ button:focus {
 }
 
 .container { 
-    padding-bottom: 40px;
+    /* padding-bottom: 40px; */
     min-height: 100vh;    
     min-width: 100vw;
 }
@@ -166,7 +166,7 @@ button:focus {
     color: var(--font-color-light);
     transform: translate(-50%, -50%);
     left: 50%;
-    bottom: 15px;
+    bottom: 1px;
 }
 
 .made-by a {
@@ -304,6 +304,6 @@ button:focus {
     }
 
     .start-container {
-        padding: 25px;
+        padding: 15px;
     }
 }
