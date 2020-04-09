@@ -156,6 +156,25 @@ button:focus {
     height: 100vh;
 }
 
+.made-by {
+    position: absolute;
+    font-size: 1.25em;
+    color: var(--font-color-light);
+    transform: translate(-50%, -50%);
+    left: 50%;
+    bottom: 15px;
+}
+
+.made-by a {
+    color: var(--font-color-light);
+    font-weight: 700;
+}
+
+.made-by a:hover {
+    color: hsla(206, 33%, 96%, 0.637);
+    text-decoration: none;
+}
+
 .menu-btn {
     font-size: 18px;
     font-weight: 700;
