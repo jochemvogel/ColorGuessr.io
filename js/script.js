@@ -7,7 +7,7 @@ const hslBtn = document.getElementById('hsl-btn');
 const hexBtn = document.getElementById('hex-btn');
 const startBtn = document.getElementById('btn-start-game');
 const endBtn = document.getElementById('btn-end-game');
-const newRoundBtn = document.getElementById('new-round-btn');
+// const newRoundBtn = document.getElementById('new-round-btn');
 
 const container = document.getElementById('container');
 const startContainer = document.getElementById('start-container');
@@ -29,6 +29,25 @@ const difficultySelect = document.getElementById('difficulty-select');
 const displayDifficulty = document.getElementById('display-difficulty');
 const displayLifes = document.getElementById('display-lifes');
 const displayScore = document.getElementById('display-score');
+
+// New popup dom elements
+const newRoundBtn = document.getElementById('new-round-btn');
+const successMessage = document.getElementById('success-message');
+const popup = document.getElementById('popup-container');
+
+/*
+
+Good answer:
+    succesMessage.innerText = 'Good job! 😀';
+    popup.style.display = 'flex';
+
+    // Restart game and play again
+newRoundBtn.addEventListener('click', () => {
+
+    reset();
+});
+
+*/
 
 let colors = [],
     numCircles,
@@ -100,14 +119,12 @@ function setupCircles() {
             let clickedColor = this.style.backgroundColor;
 
             if(clickedColor == pickedColor) {
-                // Make it not possible to click circles twice
-                if(newRoundBtn.style.display === 'none') {
-                    updateScore();
-                    changeColors(clickedColor);
-                    container.style.backgroundColor = clickedColor;
-                    circles.forEach((circle) => circle.style.border = '2px solid hsla(210, 36%, 96%, .7)');
-                    newRoundBtn.style.display = 'block';
-                }
+                updateScore();
+                changeColors(clickedColor);
+                container.style.backgroundColor = clickedColor;
+                circles.forEach((circle) => circle.style.border = '2px solid hsla(210, 36%, 96%, .7)');
+                successMessage.innerText = 'Good job! 😀';
+                popup.style.display = 'flex';
             }
             // If clickedColor !== pickedColor
             else {
@@ -127,7 +144,6 @@ function updateScore() {
     switch (difficulty) {
         case 'Easy':
             score++;
-            console.log('this');
             break;
         case 'Medium':
             score += 2;
@@ -196,7 +212,7 @@ function reset() {
     container.style.backgroundColor = 'var(--bg-color)';
     circleDiv.style.display = 'block';
     circles.forEach((circle) => circle.style.border = 'none');
-    newRoundBtn.style.display = 'none';
+    popup.style.display = 'none';
 
     displayScore.textContent = 'Score: ' + score;
 

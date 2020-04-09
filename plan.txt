@@ -1,3 +1,2 @@
-1) Redesign/replace 'New round' button
-2) If select (difficulty) != changed --> difficulty = easy
-3) Generate circles with js (based on numCircles)
+1) If select (difficulty) != changed --> difficulty = easy
+2) Generate circles with js (based on numCircles)
