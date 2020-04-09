@@ -197,6 +197,7 @@ button:focus {
     display: none;
     align-items: center;
     justify-content: center;
+    
 }
 
 .popup {
@@ -284,7 +285,7 @@ button:focus {
     
     .circle {
         width: 30%;
-        padding: 22%;
+        padding: 21%;
         height: 100%;
         margin: 3%;
     }
@@ -298,5 +299,11 @@ button:focus {
         font-size: 28px;
     }
 
-  
+    .popup-container {
+        overflow: auto;
+    }
+
+    .start-container {
+        padding: 25px;
+    }
 }
