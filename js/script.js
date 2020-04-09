@@ -6,8 +6,8 @@ const rgbBtn = document.getElementById('rgb-btn');
 const hslBtn = document.getElementById('hsl-btn');
 const hexBtn = document.getElementById('hex-btn');
 const startBtn = document.getElementById('btn-start-game');
+const newRoundBtn = document.getElementById('new-round-btn');
 const endBtn = document.getElementById('btn-end-game');
-// const newRoundBtn = document.getElementById('new-round-btn');
 
 const container = document.getElementById('container');
 const startContainer = document.getElementById('start-container');
@@ -19,10 +19,8 @@ const circles = document.querySelectorAll('.circle');
 const circleDisplay = document.querySelectorAll('#circles');
 const circleDiv = document.getElementById('circles');
 
-const displayColorGroup = document.getElementById('display-color-group');
-const displayColorGroupEl = document.querySelectorAll('span');
-const btnGroup = document.getElementById('button-group');
-const btnGroupEl = btnGroup.querySelectorAll('.btn');
+const displayColorGroupEl = document.getElementById('display-color-group').querySelectorAll('span');
+const btnGroupEl = document.getElementById('button-group').querySelectorAll('.btn');
 
 const difficultySelect = document.getElementById('difficulty-select');
 
@@ -30,37 +28,15 @@ const displayDifficulty = document.getElementById('display-difficulty');
 const displayLifes = document.getElementById('display-lifes');
 const displayScore = document.getElementById('display-score');
 
-// New popup dom elements
-const newRoundBtn = document.getElementById('new-round-btn');
 const successMessage = document.getElementById('success-message');
 const popup = document.getElementById('popup-container');
 
-/*
-
-Good answer:
-    succesMessage.innerText = 'Good job! 😀';
-    popup.style.display = 'flex';
-
-    // Restart game and play again
-newRoundBtn.addEventListener('click', () => {
-
-    reset();
-});
-
-*/
-
 let colors = [],
     numCircles,
-    difficulty,
     pickedColor,
+    difficulty = 'Medium',
     score = 0,
-    lifes = 3,
-    guesses = 0,
-    oneGuess = true;
-
-// Set difficulty
-const setDifficulty = localStorage.getItem('difficulty') !== null ? localStorage.getItem('difficulty') : 'Easy';
-difficulty = setDifficulty;
+    lifes = 3;
 
 // Start app
 function init() {
@@ -68,11 +44,11 @@ function init() {
     setupCircles();
     displayLifes.innerHTML = `Lifes: <strong>${lifes}</strong>`; // <-- Replace this with new function
     reset();
-    difficultyLS();
 }
 
 // Create the right amount of circles per difficulty
 function selectDifficulty() {
+
     switch(difficulty) {
         case 'Easy':
             numCircles = 3;
@@ -83,8 +59,13 @@ function selectDifficulty() {
         case 'Hard':
             numCircles = 9;
             break;
+        case 'Impossible':
+            numCircles = 21;
+            break;
         default:
-            numCircles = 30;
+            difficulty = 'Medium';
+            numCircles = 6;
+            break;
     }
 }
 
@@ -132,8 +113,6 @@ function setupCircles() {
 
                 this.style.backgroundColor = 'hsl(209, 28%, 39%)';
                 this.style.border = 'none';
-
-                oneGuess = false;
             } 
         })
     });
@@ -232,18 +211,6 @@ function gameOver() {
     endScore.innerHTML = `Your final score is: <strong>${score}</strong`;
     endContainer.style.display = 'flex';
     circleDiv.style.display = 'none';
-}
-
-
-
-// Not working yet --> difficulty that's stored in localStorage has to be pre selected
-function difficultyLS() {
-    // if(difficulty) {
-    //     document.getElementById('Medium').selected = 'true';
-    //     document.getElementById('Medium').classList.add = 'true';
-    //     console.log(typeof difficulty);
-    // }
-    return true;
 }
 
 /*
@@ -352,7 +319,4 @@ startBtn.addEventListener('click', () => {
 endBtn.addEventListener('click', () => location.reload());
 
 // Difficulty change
-difficultySelect.addEventListener('change', e => {
-    difficulty = e.target.value;
-    localStorage.setItem('difficulty', difficulty);
-});
+difficultySelect.addEventListener('change', e => difficulty = e.target.value);
