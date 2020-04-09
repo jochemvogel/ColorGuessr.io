@@ -121,6 +121,14 @@ button:focus {
     margin: 20px 0;
 }
 
+.difficulty-form {
+    margin-top: 15px;
+}
+
+.difficulty-form h3 {
+    font-weight: bold;
+}
+
 .display-color-group {
     font-size: 0.7em;
     text-align: center;
@@ -137,6 +145,7 @@ button:focus {
 .display-color-group span:not(.selected-display) {
     display: none;
 }
+
 
 .display-lifes {
     margin: 20px 0;
