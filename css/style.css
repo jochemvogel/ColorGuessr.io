@@ -144,6 +144,10 @@ button:focus {
     margin: 20px 0;
 }
 
+.display-score {
+    margin-bottom: 20px;
+}
+
 .end-container {
     display: none;
     background-color: var(--bg-color);
@@ -261,10 +265,38 @@ button:focus {
 /* MEDIA QUERIES */
 
 @media screen and (max-width: 500px) {
+    h1 {
+        font-size: 40px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    h3 {
+        font-size: 20px;
+    }
+
+    .button-group .btn {
+        margin: 20px;
+        font-size: 15px;
+    }
+    
     .circle {
         width: 30%;
-        padding: 20%;
+        padding: 22%;
         height: 100%;
-        margin: 5%;
+        margin: 3%;
     }
+
+    .circles {
+        text-align: center;
+        margin: 0;
+    }
+
+    .display-color-group span {
+        font-size: 28px;
+    }
+
+  
 }
