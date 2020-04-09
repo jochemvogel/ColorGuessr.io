@@ -68,7 +68,6 @@ button:focus {
 .btn {
     font-size: 14px;
     font-family: 'Nunito', sans-serif;
-    font-style: italic;
     color: var(--font-color-light);
     background-color: var(--button-bg-color);
     cursor: pointer;
@@ -114,7 +113,6 @@ button:focus {
 }
 
 .container { 
-    /* padding-bottom: 40px; */
     min-height: 100vh;    
     min-width: 100vw;
 }
@@ -182,7 +180,6 @@ button:focus {
 .menu-btn {
     font-size: 18px;
     font-weight: 700;
-    font-style: normal;
     border-radius: 4px;
     padding: 10px 30px;
 }
@@ -213,7 +210,6 @@ button:focus {
 }
 
 .popup button {
-    font-style: normal;
     color: var(--button-bg-color);
     background-color: var(--font-color-light);
     font-size: 16px;

@@ -10,15 +10,11 @@ De levels zijn:
 - Easy (3 circles)
 - Medium (6 circles)
 - Hard (9 circles)
-- Impossible (30 circles)
+- Impossible (20 circles)
 
 ## Toekomst:
 
-In de toekomst lijkt het mij leuk om een werkend punten systeem te krijgen. Elk level heeft zo zijn eigen punten, waardoor het een echt werkend spel wordt. Deze punten worden opgeslagen in localStorage, zodat deze zichtbaar blijven.
-
-Op het moment dat iemand de kleur in 1 keer raad, krijgt deze er drie punten bij. 
-
-Daarnaast wil ik extra functionaliteit aan de hartjes/levens toevoegen. Wanneer iemand drie keer achter elkaar de juiste kleur raad, komt er een extra leven bij.
+Een extra functionaliteit aan de hartjes/levens toevoegen. Wanneer iemand drie keer achter elkaar de juiste kleur raad, komt er een extra leven bij.
 
 Circles staan momenteel nog hardcodes in html, maar deze wil ik uiteindelijk genereren in Javascript.
 
