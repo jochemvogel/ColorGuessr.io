@@ -15,8 +15,7 @@ const endContainer = document.getElementById('end-container');
 
 const endScore = document.getElementById('end-score');
 
-const circles = document.querySelectorAll('.circle');
-const circleDisplay = document.querySelectorAll('#circles');
+const circles = document.querySelectorAll('.circle'); 
 const circleDiv = document.getElementById('circles');
 
 const displayColorGroup = document.getElementById('display-color-group').querySelectorAll('span');
@@ -95,7 +94,6 @@ function setupCircles() {
         })
     });
 }
-
 
 // Change all circles to same background if answer is correct
 function changeColors(color) {
@@ -202,7 +200,6 @@ function reset() {
     // Refactor this function, so hard codes circles will be replaced by Javascript
     circles.forEach((circle, index) => {
         if(colors[index]) {
-            circle.style.display = 'block';
             circle.style.backgroundColor = colors[index];
         } else {
             circle.style.display = 'none';
