@@ -5,9 +5,6 @@ const rgbDisplay = document.getElementById('rgb-display');
 const rgbBtn = document.getElementById('rgb-btn');
 const hslBtn = document.getElementById('hsl-btn');
 const hexBtn = document.getElementById('hex-btn');
-const startBtn = document.getElementById('btn-start-game');
-const newRoundBtn = document.getElementById('new-round-btn');
-const endBtn = document.getElementById('btn-end-game');
 
 const container = document.getElementById('container');
 const startContainer = document.getElementById('start-container');
@@ -21,14 +18,14 @@ const circleDiv = document.getElementById('circles');
 const displayColorGroup = document.getElementById('display-color-group').querySelectorAll('span');
 const btnGroup = document.getElementById('button-group').querySelectorAll('.btn');
 
-const difficultySelect = document.getElementById('difficulty-select');
-
 const displayDifficulty = document.getElementById('display-difficulty');
 const displayLifes = document.getElementById('display-lifes');
 const displayScore = document.getElementById('display-score');
 
 const successMessage = document.getElementById('success-message');
 const popup = document.getElementById('popup-container');
+
+// -------
 
 let colors = [],
     numCircles,
@@ -299,23 +296,31 @@ function RGBToHex(rgb) {
     return "#" + r + g + b;
 }
 
-// EVENT LISTENERS
+addEventListeners();
 
-// 'Start game' button on start screen
-startBtn.addEventListener('click', init);
+// Event listeners
+function addEventListeners() {
+    const startBtn = document.getElementById('btn-start-game');
+    const newRoundBtn = document.getElementById('new-round-btn');
+    const endBtn = document.getElementById('btn-end-game');
+    const difficultySelect = document.getElementById('difficulty-select');
 
-// Difficulty select on start screen
-difficultySelect.addEventListener('change', e => difficulty = e.target.value);
+    // 'Start game' button on start screen
+    startBtn.addEventListener('click', init);
 
-// Color shades buttons
-rgbBtn.addEventListener('click', () => showButtons('rgb'));
-hslBtn.addEventListener('click', () => showButtons('hsl'));
-hexBtn.addEventListener('click', () => showButtons('hex'));
+    // Difficulty select on start screen
+    difficultySelect.addEventListener('change', e => difficulty = e.target.value);
 
-// 'New round' button after giving correct answer
-newRoundBtn.addEventListener('click', reset);
+    // Color shades buttons
+    rgbBtn.addEventListener('click', () => showButtons('rgb'));
+    hslBtn.addEventListener('click', () => showButtons('hsl'));
+    hexBtn.addEventListener('click', () => showButtons('hex'));
 
-// 'Back to menu' button on end screen
-endBtn.addEventListener('click', () => location.reload());
+    // 'New round' button after giving correct answer
+    newRoundBtn.addEventListener('click', reset);
+
+    // 'Back to menu' button on end screen
+    endBtn.addEventListener('click', () => location.reload());
+}
 
 
