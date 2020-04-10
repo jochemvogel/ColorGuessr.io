@@ -1,0 +1,5 @@
+Upcoming features
+
+1) Add highScore to localStorage
+    -> If score > highScore --> score == highScore.
+

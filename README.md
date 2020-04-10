@@ -1,20 +1,20 @@
 # ColorGuessr.io
 
-[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
-
 <a href="https://jochemvogel.nl.nl/"><img src="https://i.ibb.co/McD1Bzx/thinking.png" height= 120 width=120/ align="right"></a>
 
-ColorGuessr is een game voor echte designerds. Er wordt een HSL color space gegeven en vervolgens heeft de gebruiker een aantal keuzes (a.d.h.v. het level dat gekozen is). Tijdens de game kan de gebruiker continu switchen tussen HSL, RGB of HEX. Zo kun je de game spelen voor elke color space.
+ColorGuessr is a game for the real designerds. A color space (hsl, rgb and/or hex) will be given and it's up to you to choose the circle with the right color. The higher the level, the more points you get. But be careful, you've three lifes.
 
-De levels zijn:
+The current levels are:
 - Easy (3 circles)
 - Medium (6 circles)
 - Hard (9 circles)
-- Impossible (20 circles)
+- Impossible (21 circles)
 
-## Toekomst:
+## Future features:
 
-Een extra functionaliteit aan de hartjes/levens toevoegen. Wanneer iemand drie keer achter elkaar de juiste kleur raad, komt er een extra leven bij.
+### - Highscore:
+Add the highScore to localStorage, so user can beat their own score
 
-Circles staan momenteel nog hardcodes in html, maar deze wil ik uiteindelijk genereren in Javascript.
+### - Lifes
+The lifes functionality is already added to the game, but I'd like to add hearts instead of a number to show the amount of lifes left.
 
