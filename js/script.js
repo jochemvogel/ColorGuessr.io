@@ -25,8 +25,6 @@ const displayScore = document.getElementById('display-score');
 const successMessage = document.getElementById('success-message');
 const popup = document.getElementById('popup-container');
 
-// -------
-
 let colors = [],
     numCircles,
     pickedColor,
@@ -38,9 +36,9 @@ let colors = [],
 // Start app
 function init() {
     selectDifficulty();
+    reset();
     setupCircles();
     updateLifes();
-    reset();
 }
 
 // Create the right amount of circles per difficulty
@@ -67,34 +65,48 @@ function selectDifficulty() {
 
 // Set up the circles
 function setupCircles() {
+    circleDiv.style.display = 'block';
+
+    for(let i = 0; i < numCircles; i++) {
+        let circle = document.createElement('div');
+        circle.setAttribute('class', 'circle');
+        circle.style.display = 'block';
+        circle.style.backgroundColor = colors[i];
+        circleDiv.appendChild(circle);
+    }
+
+    const circles = document.querySelectorAll('.circle'); 
     circles.forEach((circle) => {
         circle.addEventListener('click', function() {
             let clickedColor = this.style.backgroundColor;
 
             if(clickedColor == pickedColor) {
-                updateScore();
-                changeColors(clickedColor);
+                increaseScore();
+
                 container.style.backgroundColor = clickedColor;
-                circles.forEach((circle) => circle.style.border = '2px solid hsla(210, 36%, 96%, .7)');
                 popup.style.display = 'flex';
 
+                // Make every circle the right color & give it a white border
+                circles.forEach((item) => {
+                    item.style.border = '2px solid hsla(210, 36%, 96%, .7)';
+                    item.style.backgroundColor = pickedColor;
+                });
+
+                // Different message for single guess on impossible level
                 difficulty === 'Impossible' && oneGuess == true ? successMessage.innerText = 'Ok.. You\'re a designerd 👨‍🎨' : successMessage.innerText = 'Good job! 😀';
             }
-            // If clickedColor !== pickedColor
+            // If clickedColor !== pickedColor && circle is not already clicked (otherwise: loses points for clicking same circle again)
             else {
-                lifes--
-                oneGuess = false;
-                this.style.backgroundColor = 'hsl(209, 28%, 39%)';
-                this.style.border = 'none';
-                updateLifes();
+                if(!this.classList.contains('clicked')) {
+                    lifes--
+                    oneGuess = false;
+                    this.style.backgroundColor = 'hsl(209, 28%, 39%)';
+                    this.classList.add('clicked');
+                    updateLifes();
+                } 
             } 
         })
     });
-}
-
-// Change all circles to same background if answer is correct
-function changeColors(color) {
-    circles.forEach(item => item.style.backgroundColor = color);
 }
 
 // Pick a random color and this will be the correct color during the game
@@ -102,28 +114,8 @@ function pickColor() {
     let random = Math.floor(Math.random() * colors.length);
 
     // Make variable, so it can be used outside the function
-    randomWord = colors[random];
-    return randomWord;
-}
-
-// Update score
-function updateScore() {
-    switch (difficulty) {
-        case 'Easy':
-            score++;
-            break;
-        case 'Medium':
-            score += 2;
-            break;
-        case 'Hard':
-            score += 5;
-            break;
-        case 'Impossible':
-            score += 10;
-            break;
-    }
-
-    displayScore.textContent = 'Score: ' + score;
+    randomValue = colors[random];
+    return randomValue;
 }
 
 // Push random numbers to array
@@ -136,12 +128,7 @@ function generateRandomColors(num) {
     return arr;
 }
 
-// Update amount of lifes based on current amount of lifes
-function updateLifes() {
-    lifes >= 1 ? displayLifes.innerHTML = `Lifes: <strong>${lifes}</strong>` : gameOver();
-}
-
-// Show switch buttons and make them work
+// Show switch (color) buttons 
 function showButtons(button) {
     // 1) Remove selected class from all classes
     displayColorGroup.forEach((item) => item.classList.remove('selected-display'));
@@ -174,8 +161,10 @@ function randomColor() {
     return "rgb(" + r + ", " + g + ", " + b + ")";
 }
 
-// Pick new color and reset score
+// Pick new color, reset score & update color display
 function reset() {
+    clearCircles();
+
     colors = generateRandomColors(numCircles);
     pickedColor = pickColor();
     oneGuess = true;
@@ -188,21 +177,39 @@ function reset() {
     popup.style.display = 'none';
     container.style.backgroundColor = 'var(--bg-color)';
 
-    circleDiv.style.display = 'block';
-    circles.forEach((circle) => circle.style.border = 'none');
-
     displayScore.textContent = 'Score: ' + score; 
     displayDifficulty.innerHTML = `Your difficulty: <strong>${difficulty}</strong>`;
-
-    // Refactor this function, so hard codes circles will be replaced by Javascript
-    circles.forEach((circle, index) => {
-        if(colors[index]) {
-            circle.style.backgroundColor = colors[index];
-        } else {
-            circle.style.display = 'none';
-        }
-    })
 };
+
+// Clear the (old) circles
+function clearCircles() {
+    circleDiv.innerHTML = '';
+}
+
+// Update score
+function increaseScore() {
+    switch (difficulty) {
+        case 'Easy':
+            score++;
+            break;
+        case 'Medium':
+            score += 2;
+            break;
+        case 'Hard':
+            score += 5;
+            break;
+        case 'Impossible':
+            score += 10;
+            break;
+    }
+
+    displayScore.textContent = 'Score: ' + score;
+}
+
+// Update amount of lifes based on current amount of lifes
+function updateLifes() {
+    lifes >= 1 ? displayLifes.innerHTML = `Lifes: <strong>${lifes}</strong>` : gameOver();
+}
 
 // User has 0 lifes --> End screen
 function gameOver() {
@@ -317,7 +324,7 @@ function addEventListeners() {
     hexBtn.addEventListener('click', () => showButtons('hex'));
 
     // 'New round' button after giving correct answer
-    newRoundBtn.addEventListener('click', reset);
+    newRoundBtn.addEventListener('click', init);
 
     // 'Back to menu' button on end screen
     endBtn.addEventListener('click', () => location.reload());

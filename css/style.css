@@ -107,6 +107,10 @@ button:focus {
     transition: background 400ms;
 }
 
+.circle .clicked {
+    border: none;
+}
+
 .circles {
     display: none;
     max-width: 700px;
