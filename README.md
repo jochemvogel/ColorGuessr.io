@@ -1,6 +1,6 @@
 # ColorGuessr.io
 
-<a href="https://jochemvogel.nl.nl/"><img src="https://i.ibb.co/McD1Bzx/thinking.png" height= 120 width=120/ align="right"></a>
+<a href="https://jochemvogel.nl.nl/"><img src="https://i.ibb.co/xH0gcjh/favicon.png" height= 120 width=120/ align="right"></a>
 
 ColorGuessr is a game for the real designerds. A color space (hsl, rgb and/or hex) will be given and it's up to you to choose the circle with the right color. The higher the level, the more points you get. But be careful, you've three lifes.
 
