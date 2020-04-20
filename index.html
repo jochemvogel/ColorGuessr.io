@@ -1,82 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A game for the real designerds - by Jochem Vogel">
-    <meta name="author" content="Jochem Vogel">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A game for the real designerds - by Jochem Vogel">
+  <meta name="author" content="Jochem Vogel">
 
-    <link rel="icon" type="image/png" href="img/favicon.png"/>
-    <link rel="shortcut icon" type="image/png" href="img/favicon.png"/>
-    <link rel="apple-touch-icon" href="img/favicon.png">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Nunito:300,400,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="icon" type="image/png" href="img/favicon.png" />
+  <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
+  <link rel="apple-touch-icon" href="img/favicon.png">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Nunito:300,400,700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
 
-    <title>ColorGuessr</title>
+  <title>ColorGuessr</title>
 </head>
 
 <body>
-    <div class="container" id="container">
-        <h1>ColorGuessr.io</h1>
-        <div id="display-color-group" class="display-color-group">
-            <span id="hsl-display" class="hsl-display selected-display"></span>
-            <span id="hex-display" class="hex-display"></span>
-            <span id="rgb-display" class="rgb-display"></span>
+  <div class="container" id="container">
+    <h1>ColorGuessr.io</h1>
+    <div id="display-color-group" class="display-color-group">
+      <span id="hsl-display" class="hsl-display selected-display"></span>
+      <span id="hex-display" class="hex-display"></span>
+      <span id="rgb-display" class="rgb-display"></span>
+    </div>
+
+    <div id="button-group" class="button-group">
+      <button id="hsl-btn" class="btn hsl-btn selected-btn">Switch to hsl</button>
+      <button id="hex-btn" class="btn hex-btn">Switch to hex</button>
+      <button id="rgb-btn" class="btn rgb-btn">Switch to rgb</button>
+    </div>
+
+    <h3 id="display-difficulty" class="display-difficulty"></h3>
+    <h3 id="display-lifes" class="display-lifes"></h3>
+    <h2 id="display-score" class="display-score"></h2>
+
+    <div id="circles" class="circles"></div>
+
+  </div>
+
+  <div id="start-container" class="start-container show">
+    <h1>ColorGuessr.io</h1>
+
+    <p class="start-description">ColorGuessr is a game for the real designerds. A color space (hsl, rgb and/or hex) will
+      be given and it's up to you to choose the circle with the right color. The higher the level, the more points you
+      get. But be careful, you've three lifes. Good luck!</p>
+
+    <div class="difficulty-form">
+      <h3>Select difficulty</h3>
+      <form id="difficulty-select">
+        <div>
+          <label for="difficulty"></label>
+          <select name="difficulty" id="difficulty">
+            <option value="Easy">Easy</option>
+            <option value="Medium" selected>Medium</option>
+            <option value="Hard">Hard</option>
+            <option value="Impossible">Impossible</option>
+          </select>
         </div>
-
-        <div id="button-group" class="button-group">
-            <button id="hsl-btn" class="btn hsl-btn selected-btn">Switch to hsl</button>
-            <button id="hex-btn" class="btn hex-btn">Switch to hex</button>
-            <button id="rgb-btn" class="btn rgb-btn">Switch to rgb</button>
-        </div>
-
-        <h3 id="display-difficulty" class="display-difficulty"></h3>
-        <h3 id="display-lifes" class="display-lifes"></h3>
-        <h2 id="display-score" class="display-score"></h2>
-
-        <div id="circles" class="circles"></div>
-
+      </form>
     </div>
 
-    <div id="start-container" class="start-container show">
-        <h1>ColorGuessr.io</h1>
+    <button id="btn-start-game" class="btn menu-btn">Start game</button>
+  </div>
 
-        <p class="start-description">ColorGuessr is a game for the real designerds. A color space (hsl, rgb and/or hex) will be given and it's up to you to choose the circle with the right color. The higher the level, the more points you get. But be careful, you've three lifes. Good luck!</p>
-
-        <div class="difficulty-form">
-          <h3>Select difficulty</h3>
-          <form id="difficulty-select">
-            <div>
-              <label for="difficulty"></label>
-              <select name="difficulty" id="difficulty">
-                <option value="Easy">Easy</option>
-                <option value="Medium" selected>Medium</option>
-                <option value="Hard">Hard</option>
-                <option value="Impossible">Impossible</option>
-              </select>
-            </div>
-          </form>
-        </div>
-
-        <button id="btn-start-game" class="btn menu-btn">Start game</button>
+  <!-- Popup after giving right answer -->
+  <div class="popup-container" id="popup-container">
+    <div class="popup">
+      <h2 id="success-message"></h2>
+      <button id="new-round-btn" class="new-round-btn btn">New round</button>
     </div>
+  </div>
 
-    <!-- Popup after giving right answer -->
-    <div class="popup-container" id="popup-container">
-      <div class="popup">
-          <h2 id="success-message"></h2>
-          <button id="new-round-btn" class="new-round-btn btn">New round</button>
-      </div>
-    </div>
-    
-    <div id="end-container" class="end-container">
-      <h1>Game over</h1>
-      <h2 id="end-score" class="end-score"></h2>
-      <button id="btn-end-game" class="btn menu-btn">Back to menu</button>
+  <div id="end-container" class="end-container">
+    <h1>Game over</h1>
+    <h2 id="end-score" class="end-score"></h2>
+    <button id="btn-end-game" class="btn menu-btn">Back to menu</button>
 
-      <p class="made-by">By <a href="https://www.jochemvogel.nl/" target="_blank">Jochem Vogel</a></p>
-    </div>
+    <p class="made-by">By <a href="https://www.jochemvogel.com/" target="_blank">Jochem Vogel</a></p>
+  </div>
 
-    <script src="js/script.js"></script>
+  <script src="js/script.js"></script>
 </body>
+
 </html>
