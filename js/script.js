@@ -12,7 +12,7 @@ const endContainer = document.getElementById('end-container');
 
 const endScore = document.getElementById('end-score');
 
-const circles = document.querySelectorAll('.circle'); 
+const circles = document.querySelectorAll('.circle');
 const circleDiv = document.getElementById('circles');
 
 const displayColorGroup = document.getElementById('display-color-group').querySelectorAll('span');
@@ -24,6 +24,8 @@ const displayScore = document.getElementById('display-score');
 
 const successMessage = document.getElementById('success-message');
 const popup = document.getElementById('popup-container');
+
+alert("I don't know what's going on, but I'm aware of the styling problems. Gonna fix it soon.");
 
 let colors = [],
     numCircles,
@@ -43,7 +45,7 @@ function init() {
 
 // Create the right amount of circles per difficulty
 function selectDifficulty() {
-    switch(difficulty) {
+    switch (difficulty) {
         case 'Easy':
             numCircles = 3;
             break;
@@ -67,7 +69,7 @@ function selectDifficulty() {
 function setupCircles() {
     circleDiv.style.display = 'block';
 
-    for(let i = 0; i < numCircles; i++) {
+    for (let i = 0; i < numCircles; i++) {
         let circle = document.createElement('div');
         circle.setAttribute('class', 'circle');
         circle.style.display = 'block';
@@ -75,12 +77,12 @@ function setupCircles() {
         circleDiv.appendChild(circle);
     }
 
-    const circles = document.querySelectorAll('.circle'); 
+    const circles = document.querySelectorAll('.circle');
     circles.forEach((circle) => {
-        circle.addEventListener('click', function() {
+        circle.addEventListener('click', function () {
             let clickedColor = this.style.backgroundColor;
 
-            if(clickedColor == pickedColor) {
+            if (clickedColor == pickedColor) {
                 increaseScore();
 
                 container.style.backgroundColor = clickedColor;
@@ -97,14 +99,14 @@ function setupCircles() {
             }
             // If clickedColor !== pickedColor && circle is not already clicked (otherwise: loses points for clicking same circle again)
             else {
-                if(!this.classList.contains('clicked')) {
+                if (!this.classList.contains('clicked')) {
                     lifes--
                     oneGuess = false;
                     this.style.backgroundColor = 'hsl(209, 28%, 39%)';
                     this.classList.add('clicked');
                     updateLifes();
-                } 
-            } 
+                }
+            }
         })
     });
 }
@@ -121,7 +123,7 @@ function pickColor() {
 // Push random numbers to array
 function generateRandomColors(num) {
     let arr = []
-    for(var i = 0; i < num; i++) {
+    for (var i = 0; i < num; i++) {
         arr.push(randomColor());
     }
 
@@ -135,7 +137,7 @@ function showButtons(button) {
     btnGroup.forEach((item) => item.classList.remove('selected-btn'));
 
     // 2) Add selected class to correct class
-    switch(button) {
+    switch (button) {
         case 'rgb':
             rgbDisplay.classList.add('selected-display');
             rgbBtn.classList.add('selected-btn');
@@ -177,7 +179,7 @@ function reset() {
     popup.style.display = 'none';
     container.style.backgroundColor = 'var(--bg-color)';
 
-    displayScore.textContent = 'Score: ' + score; 
+    displayScore.textContent = 'Score: ' + score;
     displayDifficulty.innerHTML = `Your difficulty: <strong>${difficulty}</strong>`;
 };
 
@@ -228,11 +230,11 @@ function gameOver() {
 function RGBtoHSL(rgb) {
     let sep = rgb.indexOf(",") > -1 ? "," : " ";
     rgb = rgb.substr(4).split(")")[0].split(sep);
-  
+
     for (let R in rgb) {
-      let r = rgb[R];
-      if (r.indexOf("%") > -1)
-        rgb[R] = Math.round(r.substr(0,r.length - 1) / 100 * 255);
+        let r = rgb[R];
+        if (r.indexOf("%") > -1)
+            rgb[R] = Math.round(r.substr(0, r.length - 1) / 100 * 255);
     }
 
     // Make r, g and b fractions of 1
@@ -253,13 +255,13 @@ function RGBtoHSL(rgb) {
     // No difference
     if (delta == 0) {
         h = 0;
-    // Red is max
+        // Red is max
     } else if (cmax == r) {
         h = ((g - b) / delta) % 6;
-    // Green is max
+        // Green is max
     } else if (cmax == g) {
-        h = ((b - r) / delta)  + 2;
-    // Blue is max
+        h = ((b - r) / delta) + 2;
+        // Blue is max
     } else {
         h = (r - g) / delta + 4;
     }
@@ -288,18 +290,18 @@ function RGBToHex(rgb) {
     // Choose correct separator
     let sep = rgb.indexOf(",") > -1 ? "," : " ";
     rgb = rgb.substr(4).split(")")[0].split(sep);
-  
+
     let r = (+rgb[0]).toString(16),
         g = (+rgb[1]).toString(16),
         b = (+rgb[2]).toString(16);
-  
+
     if (r.length == 1)
-      r = "0" + r;
+        r = "0" + r;
     if (g.length == 1)
-      g = "0" + g;
+        g = "0" + g;
     if (b.length == 1)
-      b = "0" + b;
-  
+        b = "0" + b;
+
     return "#" + r + g + b;
 }
 
