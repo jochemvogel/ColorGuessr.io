@@ -1,8 +1,9 @@
 Upcoming features
 
-1) Add highScore to localStorage
+1). Add highScore to localStorage
     -> If score > highScore --> score == highScore.
-2) Replace reload with reset after finishing the game.
-3) Replace 'lives' with hearts.
+2). Replace reload with reset after finishing the game.
+3). Replace 'lives' with hearts.
+4). Remove inline bg color for cheating purposes. 
 
 
